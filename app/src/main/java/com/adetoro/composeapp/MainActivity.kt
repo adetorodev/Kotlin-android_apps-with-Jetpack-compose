@@ -54,16 +54,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.findViewTreeLifecycleOwner
 import com.adetoro.composeapp.ui.theme.ComposeAppTheme
 import org.w3c.dom.Text
 
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), NetworkStateListener by NetworkStateHandler() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            AppPreview()
+            Counter()
         }
+        oberserveNetworkState(this, this)
     }
 }
 
@@ -81,8 +83,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun registerForm(){
-    var text by remember {
-        mutableStateOf(TextFieldValue(" "))
+    var name = remember {
+        mutableStateOf("Name")
     }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
