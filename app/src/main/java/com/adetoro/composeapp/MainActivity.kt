@@ -2,19 +2,29 @@ package com.adetoro.composeapp
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.FloatingActionButtonDefaults.elevation
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
@@ -29,46 +39,104 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Greeting(
-                name = "Android",
-            )
+            AppPreview()
         }
     }
 }
-
+// fill Button - summit or save
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Column(modifier = Modifier
-        .padding(all = 12.dp, )
-        .border(1.dp, androidx.compose.ui.graphics.Color.Red)
-        .padding(all = 16.dp)
-        .border(2.dp, androidx.compose.ui.graphics.Color.Blue)
-
-    ) {
-
-        Text(
-            text = "Hello Coding Master",
-            color = androidx.compose.ui.graphics.Color.Red,
-            fontFamily = FontFamily.Serif,
-            fontSize = 38.sp,
-            textDecoration = TextDecoration.combine(
-                listOf(
-                    TextDecoration.LineThrough,
-                    TextDecoration.Underline
-                )
-            ),
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(start = 10.dp)
-        )
-        Text(
-            text = "Download Now"
-        )
+fun fillButton(onClick: () -> Unit){
+    Button(onClick = {
+onClick()
+    }) {
+        Text(text = "Click Me")
     }
 }
 
+// 2 Filled Tonal - add to cart, sign in
+
+@Composable
+fun filledTonalButton(onClick: () -> Unit){
+    FilledTonalButton(onClick = { onClick () }) {
+        Text(text = "Fill Button")
+    }
+}
+
+// 3 Elevated Button
+
+@Composable
+fun elevatedButton(onClick: () -> Unit){
+    ElevatedButton(onClick = { onClick () }, elevation = ButtonDefaults.buttonElevation(defaultElevation = 8.dp))
+
+    {
+        Text(text = "elevated Button")
+    }
+}
+
+// 4. outline button
+@Composable
+fun outlineButton(onClick: () -> Unit){
+    OutlinedButton(onClick = { onClick () }) {
+        Text(text = "Fill Button")
+    }
+}
+
+// Text Button
+@Composable
+fun textButton(onClick: () -> Unit){
+    TextButton(onClick = { onClick () }) {
+        Text(text = "Fill Button")
+    }
+}
+
+
+
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-        Greeting("Android")
+fun AppPreview() {
+    Column {
+        fillButton(onClick = { Log.v("TAGGY", "You clicked the button - fill") })
+        filledTonalButton(onClick = { Log.v("TAGGY", "You clicked the button - filledTonal") })
+        elevatedButton(onClick = { Log.v("TAGGY", "You clicked the button - elevated") })
+        outlineButton(onClick = { Log.v("TAGGY", "You clicked the button - outline") })
+        textButton(onClick = { Log.v("TAGGY", "You clicked the button - Text btn") })
+
+    }
 }
+
+//@Composable
+//fun Greeting(name: String, modifier: Modifier = Modifier) {
+//    Column(modifier = Modifier
+//        .padding(all = 12.dp, )
+//        .border(1.dp, androidx.compose.ui.graphics.Color.Red)
+//        .padding(all = 16.dp)
+//        .border(2.dp, androidx.compose.ui.graphics.Color.Blue)
+//
+//    ) {
+//
+//        Text(
+//            text = "Hello Coding Master",
+//            color = androidx.compose.ui.graphics.Color.Red,
+//            fontFamily = FontFamily.Serif,
+//            fontSize = 38.sp,
+//            textDecoration = TextDecoration.combine(
+//                listOf(
+//                    TextDecoration.LineThrough,
+//                    TextDecoration.Underline
+//                )
+//            ),
+//            textAlign = TextAlign.Center,
+//            modifier = Modifier.padding(start = 10.dp)
+//        )
+//        Text(
+//            text = "Download Now"
+//        )
+//    }
+//}
+//
+//@Preview(showBackground = true)
+//@Composable
+//fun GreetingPreview() {
+//        Greeting("Android")
+//}
 
