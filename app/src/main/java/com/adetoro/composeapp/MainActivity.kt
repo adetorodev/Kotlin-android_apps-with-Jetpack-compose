@@ -27,6 +27,7 @@ import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.FloatingActionButtonDefaults.elevation
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -96,33 +97,33 @@ fun registerForm(){
             modifier = Modifier.padding(all = 4.dp),
         )
 
-           TextField(value = text,
+           OutlinedTextField(value = "",
                leadingIcon = {Icon(imageVector = Icons.Default.Person, contentDescription="Person Icon")},
-               onValueChange = {newText -> text = newText},
+               onValueChange = {},
                label = {Text(text="Your Name", fontSize = 18.sp)},
                placeholder = {Text(text="Enter your name")}
            )
-           TextField(value = text,
+        OutlinedTextField(value = "",
                leadingIcon = {Icon(imageVector = Icons.Default.Person, contentDescription="Person Icon")},
-               onValueChange = {newText -> text = newText},
+               onValueChange = {},
                label = {Text(text="Username", fontSize = 18.sp)},
                placeholder = {Text(text="Enter your username")},
            )
-           TextField(value = text,
+        OutlinedTextField(value = "",
                leadingIcon = {Icon(imageVector = Icons.Default.Email, contentDescription="Email Icon")},
-               onValueChange = {newText -> text = newText},
+               onValueChange = {},
                label = {Text(text="Email", fontSize = 18.sp)},
                placeholder = {Text(text="Enter your email")}
            )
-           TextField(value = text,
+        OutlinedTextField(value = "",
                leadingIcon = {Icon(imageVector = Icons.Default.Lock, contentDescription="Lock Icon")},
-               onValueChange = {newText -> text = newText},
+               onValueChange = {},
                label = {Text(text="Password", fontSize = 18.sp)},
                placeholder = {Text(text="Enter your password")}
            )
-           TextField(value = text,
+        OutlinedTextField(value = "",
                leadingIcon = {Icon(imageVector = Icons.Default.Lock, contentDescription="Lock Icon", modifier = Modifier.padding(all = 3.dp))},
-               onValueChange = {newText -> text = newText},
+               onValueChange = {},
                label = {Text(text="Corfirm Password", fontSize = 18.sp)},
                placeholder = {Text(text="Enter your password")}
            )
