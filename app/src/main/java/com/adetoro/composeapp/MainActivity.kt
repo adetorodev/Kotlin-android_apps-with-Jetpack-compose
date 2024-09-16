@@ -22,10 +22,16 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Devices
@@ -43,66 +49,68 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-// fill Button - summit or save
-@Composable
-fun fillButton(onClick: () -> Unit){
-    Button(onClick = {
-onClick()
-    }) {
-        Text(text = "Click Me")
-    }
-}
-
-// 2 Filled Tonal - add to cart, sign in
 
 @Composable
-fun filledTonalButton(onClick: () -> Unit){
-    FilledTonalButton(onClick = { onClick () }) {
-        Text(text = "Fill Button")
+fun textFiled(){
+    var text by remember {
+        mutableStateOf(TextFieldValue())
     }
+    TextField(value = text, onValueChange = {
+        newValue -> text = newValue
+    } )
 }
-
-// 3 Elevated Button
-
-@Composable
-fun elevatedButton(onClick: () -> Unit){
-    ElevatedButton(onClick = { onClick () }, elevation = ButtonDefaults.buttonElevation(defaultElevation = 8.dp))
-
-    {
-        Text(text = "elevated Button")
-    }
-}
-
-// 4. outline button
-@Composable
-fun outlineButton(onClick: () -> Unit){
-    OutlinedButton(onClick = { onClick () }) {
-        Text(text = "Fill Button")
-    }
-}
-
-// Text Button
-@Composable
-fun textButton(onClick: () -> Unit){
-    TextButton(onClick = { onClick () }) {
-        Text(text = "Fill Button")
-    }
-}
-
-
 
 @Preview(showBackground = true)
 @Composable
 fun AppPreview() {
-    Column {
-        fillButton(onClick = { Log.v("TAGGY", "You clicked the button - fill") })
-        filledTonalButton(onClick = { Log.v("TAGGY", "You clicked the button - filledTonal") })
-        elevatedButton(onClick = { Log.v("TAGGY", "You clicked the button - elevated") })
-        outlineButton(onClick = { Log.v("TAGGY", "You clicked the button - outline") })
-        textButton(onClick = { Log.v("TAGGY", "You clicked the button - Text btn") })
-
-    }
+    textFiled()
 }
+//// fill Button - summit or save
+//@Composable
+//fun fillButton(onClick: () -> Unit){
+//    Button(onClick = {
+//onClick()
+//    }) {
+//        Text(text = "Click Me")
+//    }
+//}
+//
+//// 2 Filled Tonal - add to cart, sign in
+//
+//@Composable
+//fun filledTonalButton(onClick: () -> Unit){
+//    FilledTonalButton(onClick = { onClick () }) {
+//        Text(text = "Fill Button")
+//    }
+//}
+//
+//// 3 Elevated Button
+//
+//@Composable
+//fun elevatedButton(onClick: () -> Unit){
+//    ElevatedButton(onClick = { onClick () }, elevation = ButtonDefaults.buttonElevation(defaultElevation = 8.dp))
+//
+//    {
+//        Text(text = "elevated Button")
+//    }
+//}
+//
+//// 4. outline button
+//@Composable
+//fun outlineButton(onClick: () -> Unit){
+//    OutlinedButton(onClick = { onClick () }) {
+//        Text(text = "Fill Button")
+//    }
+//}
+//
+//// Text Button
+//@Composable
+//fun textButton(onClick: () -> Unit){
+//    TextButton(onClick = { onClick () }) {
+//        Text(text = "Fill Button")
+//    }
+//}
+
 
 //@Composable
 //fun Greeting(name: String, modifier: Modifier = Modifier) {
