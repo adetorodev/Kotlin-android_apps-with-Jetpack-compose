@@ -86,6 +86,8 @@ class MainActivity : ComponentActivity(), NetworkStateListener by NetworkStateHa
         }
     }
 }
+
+
 //
 //@Composable
 //fun progressIndicatorChallenge(progress: Float, onclickButton: () -> Unit, text: String){
