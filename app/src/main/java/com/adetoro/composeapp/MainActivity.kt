@@ -38,6 +38,7 @@ import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults.elevation
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
@@ -50,6 +51,8 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarColors
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -59,6 +62,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
@@ -82,8 +86,7 @@ class MainActivity : ComponentActivity(), NetworkStateListener by NetworkStateHa
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-
-
+            MyScaffold()
         }
     }
 
@@ -93,10 +96,8 @@ class MainActivity : ComponentActivity(), NetworkStateListener by NetworkStateHa
 @Preview(showBackground = true)
 @Composable
 fun MyScaffold() {
-    Scaffold (
-        topBar = {
-            TopAppBar(title = { Text(text = "TopAppBar Title") })
-        },
+    Scaffold(
+        topBar = { MyTopappBar() },
         bottomBar = {
             BottomAppBar(containerColor = androidx.compose.ui.graphics.Color.Red) {
 
@@ -104,12 +105,54 @@ fun MyScaffold() {
         },
         floatingActionButton = {
             FloatingActionButton(onClick = { /*TODO*/ }) {
-                
+
             }
         }
     ) {
+        paddingValues -> Log.d("Tagg", "The padding vale $paddingValues")
         MyColumn()
     }
+}
+
+@Composable
+fun MyTopappBar() {
+    val context = LocalContext.current
+    TopAppBar(
+        title = { Text(text = "TopAppBar Title") },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = androidx.compose.ui.graphics.Color.Green,
+            titleContentColor = androidx.compose.ui.graphics.Color.Blue
+        ),
+        navigationIcon = {
+            IconButton(onClick = {
+
+                Toast.makeText(
+                    context,
+                    "you Click the Nav Icon",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }) {
+                androidx.compose.material3.Icon(
+                    painter = painterResource(id = R.drawable.baseline_menu_24),
+                    contentDescription = "Menu"
+                )
+            }
+        },
+        actions = {
+            IconButton(onClick = {
+                Toast.makeText(
+                    context,
+                    "you Click the Nav Icon",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }) {
+                androidx.compose.material3.Icon(
+                    painter = painterResource(id = R.drawable.baseline_settings_24),
+                    contentDescription = "Menu"
+                )
+            }
+        }
+    )
 }
 
 //@Preview(showBackground = true)
@@ -151,7 +194,9 @@ fun MyColumn() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(3.dp)
     ) {
         Text(text="Welcome Back")
         Text(text="Download our health app today")
