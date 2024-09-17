@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.adetoro.composeapp
 
 import android.graphics.Color
@@ -24,13 +26,16 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults.elevation
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
@@ -44,6 +49,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -76,7 +82,8 @@ class MainActivity : ComponentActivity(), NetworkStateListener by NetworkStateHa
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MySurface()
+
+
         }
     }
 
@@ -85,20 +92,42 @@ class MainActivity : ComponentActivity(), NetworkStateListener by NetworkStateHa
 
 @Preview(showBackground = true)
 @Composable
-fun MySurface() {
-    Surface (
-        modifier = Modifier.size(100.dp),
-        color = androidx.compose.ui.graphics.Color.Red,
-        contentColor = colorResource(id = R.color.purple_200),
-        shadowElevation = 1.dp,
-//        border = BorderStroke(1.dp, Color.GREEN)
-    ) {
-        Text(text="Welcome Back")
-        Text(text="Download our health app today")
-        Text(text="Download from Playstore")
+fun MyScaffold() {
+    Scaffold (
+        topBar = {
+            TopAppBar(title = { Text(text = "TopAppBar Title") })
+        },
+        bottomBar = {
+            BottomAppBar(containerColor = androidx.compose.ui.graphics.Color.Red) {
 
+            }
+        },
+        floatingActionButton = {
+            FloatingActionButton(onClick = { /*TODO*/ }) {
+                
+            }
+        }
+    ) {
+        MyColumn()
     }
 }
+
+//@Preview(showBackground = true)
+//@Composable
+//fun MySurface() {
+//    Surface (
+//        modifier = Modifier.size(100.dp),
+//        color = androidx.compose.ui.graphics.Color.Red,
+//        contentColor = colorResource(id = R.color.purple_200),
+//        shadowElevation = 1.dp,
+////        border = BorderStroke(1.dp, Color.GREEN)
+//    ) {
+//        Text(text="Welcome Back")
+//        Text(text="Download our health app today")
+//        Text(text="Download from Playstore")
+//
+//    }
+//}
 
 //@Preview(showBackground = true)
 //@Composable
@@ -117,18 +146,18 @@ fun MySurface() {
 //}
 
 //@Preview(showBackground = true)
-//@Composable
-//fun MyColumn() {
-//    Column(
-//        horizontalAlignment = Alignment.CenterHorizontally,
-//        verticalArrangement = Arrangement.SpaceEvenly,
-//        modifier = Modifier.fillMaxSize()
-//    ) {
-//        Text(text="Welcome Back")
-//        Text(text="Download our health app today")
-//        Text(text="Download from Playstore")
-//    }
-//}
+@Composable
+fun MyColumn() {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceEvenly,
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Text(text="Welcome Back")
+        Text(text="Download our health app today")
+        Text(text="Download from Playstore")
+    }
+}
 
 //@Preview(showBackground = true)
 //@Composable
