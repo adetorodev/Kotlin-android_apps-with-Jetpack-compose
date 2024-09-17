@@ -1,6 +1,7 @@
 package com.adetoro.composeapp
 
 import android.graphics.Color
+import android.graphics.Color.*
 import android.graphics.drawable.Icon
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -17,6 +19,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
@@ -35,6 +38,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -49,6 +53,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -61,6 +66,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import com.adetoro.composeapp.ui.theme.ComposeAppTheme
 import org.w3c.dom.Text
@@ -70,165 +76,73 @@ class MainActivity : ComponentActivity(), NetworkStateListener by NetworkStateHa
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            RadioButtonExample()
-//            CheckboxExample()
-//            AppPreview()
-//            var text by remember{ mutableStateOf("") }
-//            statelessTextField(text= text, onTextChanged =  {newText -> text = newText} )
+            MySurface()
         }
-//        oberserveNetworkState(this, this)
     }
+
+
 }
 
+@Preview(showBackground = true)
 @Composable
-fun RadioButtonRow(text: String, isSelected: Boolean, onSelect: () -> Unit) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically
+fun MySurface() {
+    Surface (
+        modifier = Modifier.size(100.dp),
+        color = androidx.compose.ui.graphics.Color.Red,
+        contentColor = colorResource(id = R.color.purple_200),
+        shadowElevation = 1.dp,
+//        border = BorderStroke(1.dp, Color.GREEN)
     ) {
-        RadioButton(selected = isSelected, onClick = onSelect, modifier = Modifier.padding(vertical = 4.dp))
-        Text(text=text)
+        Text(text="Welcome Back")
+        Text(text="Download our health app today")
+        Text(text="Download from Playstore")
+
     }
 }
 
-@Composable
-fun RadioButtonExample(){
-    var selectedOption by remember {
-        mutableStateOf("option 1")
-    }
-
-    var checked by remember {
-        mutableStateOf(false)
-    }
-
-    Column {
-        RadioButtonRow(
-            "option 1",
-            selectedOption == "option 1",
-            {selectedOption = "option 1"}
-        )
-        RadioButtonRow(
-            "option 2",
-            selectedOption == "option 2",
-            {selectedOption = "option 2"}
-        )
-        RadioButtonRow(
-            "option 3",
-            selectedOption == "option 3",
-            {selectedOption = "option 3"}
-        )
-        CircularProgressIndicator(progress = 0.5f )
-        LinearProgressIndicator(progress = 0.7f)
-    }
-
-
-
-//    Column {
-//        RadioButton(selected = selectedOption == "option 1", onClick = { selectedOption = "option 1" })
-//        RadioButton(selected = selectedOption == "option 2", onClick = { selectedOption = "option 2" })
-//        RadioButton(selected = selectedOption == "option 3", onClick = { selectedOption = "option 3" })
-//    }
-
-
-//    Row {
-//        Switch(checked = checked, onCheckedChange = {checked = it} )
-//    }
-
-//    Checkbox(checked = checked, onCheckedChange = {
-//            isChecked -> checked = isChecked
-//        Toast.makeText(this, "is check $checked", Toast.LENGTH_SHORT ).show()
-//    } )
-
-}
-
-@Preview
-@Composable
-fun AppPreview() {
-    RadioButtonExample()
-}
-
+//@Preview(showBackground = true)
 //@Composable
-//fun SwitchExample(){
-//    var checked by remember {
-//        mutableStateOf(false)
+//fun MyBox() {
+//    Box(
+//
+//        modifier = Modifier.fillMaxSize()
+//    ) {
+//        Text(text="Welcome Back",
+//        modifier = Modifier.align(Alignment.TopStart))
+//        Text(text="Download our health app today",
+//            modifier = Modifier.align(Alignment.Center) )
+//        Text(text="Download from Playstore",
+//            modifier = Modifier.align(Alignment.BottomEnd))
 //    }
-//
-//    Switch(checked = checked, onCheckedChange = {checked = it} )
-//
-////    Checkbox(checked = checked, onCheckedChange = {
-////            isChecked -> checked = isChecked
-////        Toast.makeText(this, "is check $checked", Toast.LENGTH_SHORT ).show()
-////    } )
-//
 //}
 
+//@Preview(showBackground = true)
 //@Composable
-//fun CheckboxExample(){
-//    var checked by remember {
-//        mutableStateOf(false)
+//fun MyColumn() {
+//    Column(
+//        horizontalAlignment = Alignment.CenterHorizontally,
+//        verticalArrangement = Arrangement.SpaceEvenly,
+//        modifier = Modifier.fillMaxSize()
+//    ) {
+//        Text(text="Welcome Back")
+//        Text(text="Download our health app today")
+//        Text(text="Download from Playstore")
 //    }
-//
-//    Checkbox(checked = checked, onCheckedChange = {
-//        isChecked -> checked = isChecked
-//        Toast.makeText(this, "is check $checked", Toast.LENGTH_SHORT ).show()
-//    } )
-//
 //}
 
+//@Preview(showBackground = true)
 //@Composable
-//fun StatefulTextField() {
-//    var name by remember {
-//        mutableStateOf("")
-//    }
-//
-//    var occupation by remember {
-//        mutableStateOf("")
-//    }
-//
-//    Column {
-//        OutlinedTextField(value = name, onValueChange = {
-//            newText -> name = newText
-//        }, label = {Text(text="Enter you Name")} )
-//        TextField(value = occupation, onValueChange = { newText ->
-//            occupation = newText
-//        }, label = { Text(text = "Enter Enter your Occupation") })
-//        Text(text = "Welcome  $name")
-//        Text(text="You are a $occupation")
+//fun MyRow() {
+//    Row(
+//        horizontalArrangement = Arrangement.SpaceEvenly,
+//        verticalAlignment = Alignment.CenterVertically,
+//        modifier = Modifier.fillMaxSize()
+//    ) {
+//        Text(text="Welcome Back")
+//        Text(text="Download our health app today")
+//        Text(text="Download from Playstore")
 //    }
 //}
 
-//State Hoisting
-
-//fun StatefulTextField() {
-//    var text by remember {
-//        mutableStateOf("")
-//    }
-//
-//
-//    Column {
-//
-//        TextField(value = text, onValueChange = { newText ->
-//            text = newText
-//        }, label = { Text(text = "Enter Enter your Occupation") })
-//        Text(text = "Welcome  $text")
-//    }
-//}
-
-//@Composable
-//fun statelessTextField(
-//    text: String,
-//    onTextChanged: (String) -> Unit
-//){
-//    Column {
-//        TextField( value = text, onValueChange = onTextChanged, label ={Text(text= "Enter a text")} )
-//        Text(text="You type $text")
-//    }
-//
-//}
 
 
-
-//@Preview
-//@Composable
-//fun AppPreview() {
-//    StatefulTextField()
-//}
