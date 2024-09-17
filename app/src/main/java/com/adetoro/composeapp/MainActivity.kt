@@ -70,55 +70,73 @@ class MainActivity : ComponentActivity(), NetworkStateListener by NetworkStateHa
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            RadioButtonExample()
-//            CheckboxExample()
-//            AppPreview()
-//            var text by remember{ mutableStateOf("") }
-//            statelessTextField(text= text, onTextChanged =  {newText -> text = newText} )
+            var progress by remember {
+                mutableStateOf(0.0f)
+            }
+            Column(verticalArrangement = Arrangement.Center) {
+                LinearProgress(progress = progress)
+                IncreaseProgressButton{
+                    progress += 0.1f
+                    if(progress > 1.0f){
+                        progress = 0.0f
+                    }
+            }
+                IncreaseProgressText(progress)
+            }
         }
-//        oberserveNetworkState(this, this)
     }
 }
+//
+//@Composable
+//fun progressIndicatorChallenge(progress: Float, onclickButton: () -> Unit, text: String){
+//    Column {
+//        ElevatedButton(onClick = onclickButton) {
+//            Text(text = "Click to increase")
+//        }
+//        LinearProgressIndicator(progress = progress )
+//    }
+//    Text(text= text)
+//}
 
-@Composable
-fun RadioButtonRow(text: String, isSelected: Boolean, onSelect: () -> Unit) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        RadioButton(selected = isSelected, onClick = onSelect, modifier = Modifier.padding(vertical = 4.dp))
-        Text(text=text)
-    }
-}
+//@Composable
+//fun RadioButtonRow(text: String, isSelected: Boolean, onSelect: () -> Unit) {
+//    Row(
+//        verticalAlignment = Alignment.CenterVertically
+//    ) {
+//        RadioButton(selected = isSelected, onClick = onSelect, modifier = Modifier.padding(vertical = 4.dp))
+//        Text(text=text)
+//    }
+//}
 
-@Composable
-fun RadioButtonExample(){
-    var selectedOption by remember {
-        mutableStateOf("option 1")
-    }
-
-    var checked by remember {
-        mutableStateOf(false)
-    }
-
-    Column {
-        RadioButtonRow(
-            "option 1",
-            selectedOption == "option 1",
-            {selectedOption = "option 1"}
-        )
-        RadioButtonRow(
-            "option 2",
-            selectedOption == "option 2",
-            {selectedOption = "option 2"}
-        )
-        RadioButtonRow(
-            "option 3",
-            selectedOption == "option 3",
-            {selectedOption = "option 3"}
-        )
-        CircularProgressIndicator(progress = 0.5f )
-        LinearProgressIndicator(progress = 0.7f)
-    }
+//@Composable
+//fun RadioButtonExample(){
+//    var selectedOption by remember {
+//        mutableStateOf("option 1")
+//    }
+//
+//    var checked by remember {
+//        mutableStateOf(false)
+//    }
+//
+//    Column {
+//        RadioButtonRow(
+//            "option 1",
+//            selectedOption == "option 1",
+//            {selectedOption = "option 1"}
+//        )
+//        RadioButtonRow(
+//            "option 2",
+//            selectedOption == "option 2",
+//            {selectedOption = "option 2"}
+//        )
+//        RadioButtonRow(
+//            "option 3",
+//            selectedOption == "option 3",
+//            {selectedOption = "option 3"}
+//        )
+//        CircularProgressIndicator(progress = 0.5f )
+//        LinearProgressIndicator(progress = 0.7f)
+//    }
 
 
 
@@ -138,13 +156,13 @@ fun RadioButtonExample(){
 //        Toast.makeText(this, "is check $checked", Toast.LENGTH_SHORT ).show()
 //    } )
 
-}
+//}
 
-@Preview
-@Composable
-fun AppPreview() {
-    RadioButtonExample()
-}
+//@Preview
+//@Composable
+//fun AppPreview() {
+//    progressIndicatorChallenge()
+//}
 
 //@Composable
 //fun SwitchExample(){
