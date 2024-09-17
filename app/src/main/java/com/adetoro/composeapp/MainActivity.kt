@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.drawable.Icon
 import android.os.Bundle
 import android.util.Log
+import android.widget.Switch
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -24,13 +25,17 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.FloatingActionButtonDefaults.elevation
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
@@ -65,27 +70,109 @@ class MainActivity : ComponentActivity(), NetworkStateListener by NetworkStateHa
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            CheckboxExample()
+            RadioButtonExample()
+//            CheckboxExample()
 //            AppPreview()
 //            var text by remember{ mutableStateOf("") }
 //            statelessTextField(text= text, onTextChanged =  {newText -> text = newText} )
         }
-        oberserveNetworkState(this, this)
+//        oberserveNetworkState(this, this)
     }
 }
 
 @Composable
-fun CheckboxExample(){
+fun RadioButtonRow(text: String, isSelected: Boolean, onSelect: () -> Unit) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        RadioButton(selected = isSelected, onClick = onSelect, modifier = Modifier.padding(vertical = 4.dp))
+        Text(text=text)
+    }
+}
+
+@Composable
+fun RadioButtonExample(){
+    var selectedOption by remember {
+        mutableStateOf("option 1")
+    }
+
     var checked by remember {
         mutableStateOf(false)
     }
 
-    Checkbox(checked = checked, onCheckedChange = {
-        isChecked -> checked = isChecked
-        Toast.makeText(this, "is check $checked", Toast.LENGTH_SHORT ).show()
-    } )
+    Column {
+        RadioButtonRow(
+            "option 1",
+            selectedOption == "option 1",
+            {selectedOption = "option 1"}
+        )
+        RadioButtonRow(
+            "option 2",
+            selectedOption == "option 2",
+            {selectedOption = "option 2"}
+        )
+        RadioButtonRow(
+            "option 3",
+            selectedOption == "option 3",
+            {selectedOption = "option 3"}
+        )
+        CircularProgressIndicator(progress = 0.5f )
+        LinearProgressIndicator(progress = 0.7f)
+    }
+
+
+
+//    Column {
+//        RadioButton(selected = selectedOption == "option 1", onClick = { selectedOption = "option 1" })
+//        RadioButton(selected = selectedOption == "option 2", onClick = { selectedOption = "option 2" })
+//        RadioButton(selected = selectedOption == "option 3", onClick = { selectedOption = "option 3" })
+//    }
+
+
+//    Row {
+//        Switch(checked = checked, onCheckedChange = {checked = it} )
+//    }
+
+//    Checkbox(checked = checked, onCheckedChange = {
+//            isChecked -> checked = isChecked
+//        Toast.makeText(this, "is check $checked", Toast.LENGTH_SHORT ).show()
+//    } )
 
 }
+
+@Preview
+@Composable
+fun AppPreview() {
+    RadioButtonExample()
+}
+
+//@Composable
+//fun SwitchExample(){
+//    var checked by remember {
+//        mutableStateOf(false)
+//    }
+//
+//    Switch(checked = checked, onCheckedChange = {checked = it} )
+//
+////    Checkbox(checked = checked, onCheckedChange = {
+////            isChecked -> checked = isChecked
+////        Toast.makeText(this, "is check $checked", Toast.LENGTH_SHORT ).show()
+////    } )
+//
+//}
+
+//@Composable
+//fun CheckboxExample(){
+//    var checked by remember {
+//        mutableStateOf(false)
+//    }
+//
+//    Checkbox(checked = checked, onCheckedChange = {
+//        isChecked -> checked = isChecked
+//        Toast.makeText(this, "is check $checked", Toast.LENGTH_SHORT ).show()
+//    } )
+//
+//}
 
 //@Composable
 //fun StatefulTextField() {
