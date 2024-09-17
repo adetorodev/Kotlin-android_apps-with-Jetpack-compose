@@ -61,6 +61,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Blue
+import androidx.compose.ui.graphics.Color.Companion.DarkGray
+import androidx.compose.ui.graphics.Color.Companion.Green
+import androidx.compose.ui.graphics.Color.Companion.Red
+import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
@@ -98,19 +104,27 @@ class MainActivity : ComponentActivity(), NetworkStateListener by NetworkStateHa
 fun MyScaffold() {
     Scaffold(
         topBar = { MyTopappBar() },
-        bottomBar = {
-            BottomAppBar(containerColor = androidx.compose.ui.graphics.Color.Red) {
-
-            }
-        },
-        floatingActionButton = {
-            FloatingActionButton(onClick = { /*TODO*/ }) {
-
-            }
-        }
+        bottomBar = {MyBottomAppBar()},
+        floatingActionButton = { MyFab() }
     ) {
         paddingValues -> Log.d("Tagg", "The padding vale $paddingValues")
         MyColumn()
+    }
+}
+
+@Composable
+fun MyFab() {
+    val context = LocalContext.current
+    FloatingActionButton(onClick = { Toast.makeText(
+        context,
+        "Add to value",
+        Toast.LENGTH_SHORT
+    ).show()
+    },
+        containerColor = Red,
+        contentColor = White
+        ) {
+        Icon(painter = painterResource(id = R.drawable.baseline_add_24), contentDescription = "Add")
     }
 }
 
@@ -120,15 +134,15 @@ fun MyTopappBar() {
     TopAppBar(
         title = { Text(text = "TopAppBar Title") },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = androidx.compose.ui.graphics.Color.Green,
-            titleContentColor = androidx.compose.ui.graphics.Color.Blue
+            containerColor = Green,
+            titleContentColor = Blue
         ),
         navigationIcon = {
             IconButton(onClick = {
 
                 Toast.makeText(
                     context,
-                    "you Click the Nav Icon",
+                    "You click on menu",
                     Toast.LENGTH_SHORT
                 ).show()
             }) {
@@ -142,7 +156,7 @@ fun MyTopappBar() {
             IconButton(onClick = {
                 Toast.makeText(
                     context,
-                    "you Click the Nav Icon",
+                    "you Click the Setting",
                     Toast.LENGTH_SHORT
                 ).show()
             }) {
@@ -153,6 +167,55 @@ fun MyTopappBar() {
             }
         }
     )
+}
+
+@Composable
+fun MyBottomAppBar() {
+    val context = LocalContext.current
+    BottomAppBar (
+        containerColor = DarkGray,
+        contentColor = Yellow,
+
+    ) {
+        Row (
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            IconButton(onClick = {  Toast.makeText(
+                context,
+                "you Click the home button",
+                Toast.LENGTH_SHORT
+            ).show() }) {
+                androidx.compose.material3.Icon(
+                    painter = painterResource(id = R.drawable.baseline_home_24),
+                    contentDescription = "Home"
+                )
+            }
+            IconButton(onClick = {  Toast.makeText(
+                context,
+                "you Click the Item bookmarked successsn",
+                Toast.LENGTH_SHORT
+            ).show() }) {
+                androidx.compose.material3.Icon(
+                    painter = painterResource(id = R.drawable.baseline_collections_bookmark_24),
+                    contentDescription = "Bookmark"
+                )
+            }
+            IconButton(onClick = {  Toast.makeText(
+                context,
+                "you Click the You can opdate profile",
+                Toast.LENGTH_SHORT
+            ).show() }) {
+                androidx.compose.material3.Icon(
+                    painter = painterResource(id = R.drawable.baseline_people_alt_24),
+                    contentDescription = "Bookmark"
+                )
+            }
+        }
+        }
+
+
 }
 
 //@Preview(showBackground = true)
