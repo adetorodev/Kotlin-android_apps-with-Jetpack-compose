@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -24,6 +26,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Blue
 import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -57,15 +60,49 @@ fun MyScaffold() {
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun myLazyColumn() {
-    val itemList = listOf<String>("Item 1 occupeer", "Item 2 the iuerig", "Item 3uirtgjnh", "Item 4 list me", "Item 5 list you good")
+    val itemList = listOf<String>("Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1",
+        "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5",
+        "Item 1", "Item 2", "Item 3", "Item 4", "Item 5")
     LazyColumn {
+        stickyHeader {
+            Text(text="Stick Header", fontSize = 42.sp, modifier = Modifier.background(Blue))
+        }
+        item {
+            Text(text="title for item", fontSize = 34.sp)
+        }
         items(itemList){
-            item -> MyCustomItem(itemTitle = item)
+                item -> MyCustomItem(itemTitle = item)
         }
     }
 }
+
+@Composable
+fun myLazyRow() {
+    val itemList = listOf<String>("Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1",
+        "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5",
+        "Item 1", "Item 2", "Item 3", "Item 4", "Item 5")
+    LazyRow  {
+        item {
+            Text(text="title for item", fontSize = 34.sp)
+        }
+        items(itemList){
+                item -> MyCustomItem(itemTitle = item)
+        }
+    }
+}
+
+//@Composable
+//fun MyCustomItem(itemTitle: String) {
+//    Row(
+//        modifier = Modifier.padding(8.dp).fillMaxSize(),
+//        verticalAlignment = Alignment.CenterVertically
+//    ) {
+//        Text(text= itemTitle, fontSize = 42.sp, modifier = Modifier.background(Green))
+//    }
+//}
 
 @Composable
 fun MyCustomItem(itemTitle: String) {
