@@ -3,12 +3,14 @@
 package com.adetoro.composeapp
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -29,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Blue
 import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -106,8 +109,11 @@ fun myLazyRow() {
 
 @Composable
 fun MyCustomItem(itemTitle: String) {
+    val context = LocalContext.current
     Row(
-        modifier = Modifier.padding(8.dp).fillMaxSize(),
+        modifier = Modifier.padding(8.dp).fillMaxSize().clickable {
+            Toast.makeText(context, "You click $itemTitle", Toast.LENGTH_SHORT).show()
+        },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(text= itemTitle, fontSize = 42.sp, modifier = Modifier.background(Green))
