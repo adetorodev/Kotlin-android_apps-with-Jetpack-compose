@@ -7,8 +7,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -53,14 +55,23 @@ fun MyScaffold() {
 //@Preview(showBackground = true)
 @Composable
 fun AppContent() {
-    Column(
-        modifier = Modifier.verticalScroll(rememberScrollState())
+
+    Row (
+        modifier = Modifier.horizontalScroll(rememberScrollState())
     ) {
         Image(painter = painterResource(id = R.drawable.pic1), contentDescription = "Image", contentScale = ContentScale.FillBounds)
         Image(painter = painterResource(id = R.drawable.pic2), contentDescription = "Image", contentScale = ContentScale.FillBounds)
         Image(painter = painterResource(id = R.drawable.pic3), contentDescription = "Image", contentScale = ContentScale.FillBounds)
     }
 }
+
+//    Column(
+//        modifier = Modifier.verticalScroll(rememberScrollState())
+//    ) {
+//        Image(painter = painterResource(id = R.drawable.pic1), contentDescription = "Image", contentScale = ContentScale.FillBounds)
+//        Image(painter = painterResource(id = R.drawable.pic2), contentDescription = "Image", contentScale = ContentScale.FillBounds)
+//        Image(painter = painterResource(id = R.drawable.pic3), contentDescription = "Image", contentScale = ContentScale.FillBounds)
+//    }
 
 
 
