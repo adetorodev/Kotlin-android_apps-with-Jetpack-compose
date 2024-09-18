@@ -11,6 +11,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -30,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Blue
 import androidx.compose.ui.graphics.Color.Companion.Green
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -111,12 +113,24 @@ fun myLazyRow() {
 fun MyCustomItem(itemTitle: String) {
     val context = LocalContext.current
     Row(
-        modifier = Modifier.padding(8.dp).fillMaxSize().clickable {
-            Toast.makeText(context, "You click $itemTitle", Toast.LENGTH_SHORT).show()
+        modifier = Modifier.padding(8.dp).fillMaxSize().pointerInput(Unit){
+            detectTapGestures (
+                onDoubleTap = {
+                    Toast.makeText(context, "You double tap $itemTitle", Toast.LENGTH_SHORT).show()
+                },
+                onTap = {
+                    Toast.makeText(context, "You Single Tap $itemTitle", Toast.LENGTH_SHORT).show()
+                }
+            )
+
         },
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(text= itemTitle, fontSize = 42.sp, modifier = Modifier.background(Green))
+        Text(text= itemTitle, fontSize = 42.sp, modifier = Modifier.background(Green)
+//            .clickable {
+//            Toast.makeText(context, "You click $itemTitle", Toast.LENGTH_SHORT).show()
+//        }
+        )
     }
 }
 
