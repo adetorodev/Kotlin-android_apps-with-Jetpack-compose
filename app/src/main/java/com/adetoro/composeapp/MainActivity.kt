@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,10 +24,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.adetoro.composeapp.widgets.MyBottomAppBar
 import com.adetoro.composeapp.widgets.MyFab
 import com.adetoro.composeapp.widgets.MyTopappBar
@@ -36,7 +39,7 @@ class MainActivity : ComponentActivity(), NetworkStateListener by NetworkStateHa
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MyScaffold()
+            myLazyColumn()
         }
     }
 }
@@ -59,8 +62,18 @@ fun myLazyColumn() {
     val itemList = listOf<String>("Item 1 occupeer", "Item 2 the iuerig", "Item 3uirtgjnh", "Item 4 list me", "Item 5 list you good")
     LazyColumn {
         items(itemList){
-            item -> Text(text= item)
+            item -> MyCustomItem(itemTitle = item)
         }
+    }
+}
+
+@Composable
+fun MyCustomItem(itemTitle: String) {
+    Row(
+        modifier = Modifier.padding(8.dp).fillMaxSize(),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(text= itemTitle, fontSize = 42.sp, modifier = Modifier.background(Green))
     }
 }
 
