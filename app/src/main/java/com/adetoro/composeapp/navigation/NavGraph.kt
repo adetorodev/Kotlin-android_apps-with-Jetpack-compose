@@ -7,8 +7,6 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.adetoro.composeapp.navigation.NavRoute.Profile.id
-import com.adetoro.composeapp.navigation.NavRoute.Profile.showDetails
 import com.adetoro.composeapp.screens.HomeScreen
 import com.adetoro.composeapp.screens.ProfileScreen
 import com.adetoro.composeapp.screens.SettingScreen
@@ -29,7 +27,7 @@ fun addHomeScreen(navController: NavHostController, navGraphBuilder: NavGraphBui
         HomeScreen(
             navigateToProfile = {
                 id, showDetails -> navController.navigate(
-                    NavRoute.Profile.path.plus("/$id/$showDetails")
+                    NavRoute.Profile.createRoute(88,false)
                 )
             },
             navigateToSetting = {navController.navigate(NavRoute.Settings.path) }
@@ -41,15 +39,15 @@ fun addProfileScreen (navController: NavHostController, navGraphBuilder: NavGrap
     navGraphBuilder.composable(
         route = NavRoute.Profile.path.plus("/{id}/{showDetails}"),
         arguments = listOf(
-            navArgument(id) { type = NavType.IntType },
-            navArgument(showDetails) { type = NavType.BoolType }
+            navArgument("id") { type = NavType.IntType },
+            navArgument("showDetails") { type = NavType.BoolType }
         )
     ) { navBackStackEntry ->
         val args = navBackStackEntry.arguments
 
         ProfileScreen(
-            id = args?.getInt(NavRoute.Profile.id)!!,
-            showDetails = args.getBoolean(NavRoute.Profile.showDetails),
+            id = args?.getInt("id")!!,
+            showDetails = args.getBoolean("showDetails"),
             navigateToSetting = { navController.navigate(NavRoute.Settings.path) }
         )
     }
