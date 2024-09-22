@@ -53,12 +53,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val navController = rememberNavController()
-            Scaffold (bottomBar = { BottomNavigationBar(navController = navController) }){
-
-
-                NavGraph(navController = navController)
-            }
+            ContainLayoutScreen()
 
         }
     }
