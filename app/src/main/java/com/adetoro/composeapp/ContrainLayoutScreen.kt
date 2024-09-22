@@ -11,6 +11,7 @@ import androidx.compose.ui.focus.FocusRequester.Companion.createRefs
 import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 
 @Composable
@@ -23,6 +24,13 @@ fun ContainLayoutScreen() {
         val guideline = createGuidelineFromStart(0.05f)
         // barrier
         val barrier = createEndBarrier(box1, box2)
+
+        // chains
+        createVerticalChain(
+            box1,
+            box2,
+            chainStyle = ChainStyle.Packed
+        )
 
         Box(modifier = Modifier.size(70.dp)
             .background(Red)
