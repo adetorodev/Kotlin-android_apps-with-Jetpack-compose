@@ -19,9 +19,12 @@ fun ContainLayoutScreen() {
     ConstraintLayout(modifier = Modifier.fillMaxWidth()) {
 
         val (box1, box2, text) = createRefs()
-        val guideline = createGuidelineFromStart(0.25f)
+//        guideline
+        val guideline = createGuidelineFromStart(0.05f)
+        // barrier
+        val barrier = createEndBarrier(box1, box2)
 
-        Box(modifier = Modifier.size(100.dp)
+        Box(modifier = Modifier.size(70.dp)
             .background(Red)
             .constrainAs(box1) {
                 top.linkTo(parent.top, margin = 16.dp)
@@ -37,7 +40,7 @@ fun ContainLayoutScreen() {
         )
         Text(text= "hello everyone there", modifier = Modifier.constrainAs(text){
             top.linkTo(box2.bottom, margin = 16.dp)
-            start.linkTo(guideline)
+            start.linkTo(barrier, margin = 16.dp)
         })
     }
 }
