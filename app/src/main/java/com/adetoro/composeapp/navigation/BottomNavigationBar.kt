@@ -24,7 +24,18 @@ fun BottomNavigationBar(navController: NavHostController) {
                 selected = selectedItem == index,
                 onClick = {
                     selectedItem = index
-                    navController.navigate(item.path){
+
+                    // handling the navigation to Profile Screen
+//                    Passing arguments bet5ween the screens
+
+                    val route = if(item.path == NavRoute.Profile.path){
+                        NavRoute.Profile.path.plus("/77/true")
+                    }else{
+                        item.path
+                    }
+
+
+                    navController.navigate(route){
                         navController.graph.startDestinationRoute?.let {
                                 route -> popUpTo(route){
                             saveState = true
